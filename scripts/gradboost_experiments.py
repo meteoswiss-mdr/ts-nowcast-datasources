@@ -663,3 +663,21 @@ def all_experiments(nc_file=None, pickle_file=None):
         models_maxz, models_lightning, models_echo45_exists, models_echo45_height,
         past_features, past_feat_echo45
     )
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--nc_file', type=str,
+        help="NetCDF4 file with dataset", default="")
+    parser.add_argument('--pickle_file', type=str,
+        help="Pickle file with dataset", default="")
+
+    args = parser.parse_args()
+    nc_file = args.nc_file
+    if not nc_file:
+        nc_file = None
+    pickle_file = args.pickle_file
+    if not pickle_file:
+        pickle_file = None
+
+    all_experiments(nc_file=nc_file, pickle_file=pickle_file)
