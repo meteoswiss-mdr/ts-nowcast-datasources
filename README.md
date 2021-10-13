@@ -6,11 +6,11 @@ You need NumPy, Pandas, Matplotlib, LightGBM, SKLearn and NetCDF4 for Python.
 
 Clone the repository, then, in the main directory, run
 ```bash
-# python setup.py develop
+$ python setup.py develop
 ```
 (if you plan to modify the code) or
 ```bash
-# python setup.py install
+$ python setup.py install
 ```
 if you just want to run it.
 
