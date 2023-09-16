@@ -70,7 +70,7 @@ def add_gb_features(past_features, future_features):
 
 
 def fit_gradboost_regression(past_feat_train, future_feat_train, past_feat_valid, future_feat_valid, 
-    additional_params=None, **kwargs):
+    additional_params=None, early_stoping_round=20, **kwargs):
 
     param = {
         "objective": "mae",        
@@ -109,7 +109,11 @@ def fit_gradboost_regression(past_feat_train, future_feat_train, past_feat_valid
     gc.collect()
     
     bst = lgb.train(param, train_data, num_boost_round=100000, 
-        valid_sets=[train_data, valid_data], early_stopping_rounds=20, **kwargs)
+        valid_sets=[train_data, valid_data], 
+        callbacks=(
+            [lgb.early_stopping(stopping_rounds=early_stoping_round)] 
+            if early_stoping_round else None
+        ), **kwargs)
     gc.collect()
 
     return bst
@@ -225,7 +229,7 @@ def evaluate_regression(models, past_features, future_features):
 
 
 def fit_gradboost_binary(past_feat_train, future_feat_train, past_feat_valid, future_feat_valid, 
-    additional_params=None, weight_data=False, **kwargs):
+    additional_params=None, weight_data=False, early_stoping_round=20, **kwargs):
 
     param = {
         "seed": 2345,
@@ -272,7 +276,10 @@ def fit_gradboost_binary(past_feat_train, future_feat_train, past_feat_valid, fu
     gc.collect()
     
     bst = lgb.train(param, train_data, num_boost_round=100000, 
-        valid_sets=[train_data, valid_data], early_stopping_rounds=20, **kwargs)
+        valid_sets=[train_data, valid_data], callbacks=(
+            [lgb.early_stopping(stopping_rounds=early_stoping_round)] 
+            if early_stoping_round else None
+        ), **kwargs)
     gc.collect()
 
     return bst

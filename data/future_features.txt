@@ -1,0 +1,12 @@
+ecmwf::deg0l::nbagg-median-25-circular
+goesglm::event_density::nbagg-any-25-circular
+goesglm::event_energy_density::nbagg-mean-25-circular
+nexrad::MAXZ::nbagg-mean-25-circular
+nexrad::MAXZ::nbagg-max-25-circular
+nexrad::MAXZ::nbagg-numgt_57-25-circular
+nexrad::VIL::nbagg-mean-25-circular
+nexrad::VIL::nbagg-median-25-circular
+nexrad::VIL::nbagg-max-25-circular
+nexrad::ECHOTOP-45::nbagg-mean-25-circular
+nexrad::ECHOTOP-45::nbagg-median-25-circular
+nexrad::ECHOTOP-45::nbagg-max-25-circular

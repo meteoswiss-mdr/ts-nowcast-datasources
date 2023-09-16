@@ -1,3 +1,4 @@
+import argparse
 from datetime import datetime
 import os
 import pickle
@@ -396,30 +397,30 @@ def combination_plots(
     return (fig1, fig2)
 
 
-def track_plot(cfg_fn, time=datetime(2020,8,25,19,20)):
-    cfg = config.load_config(cfg_fn)
-    (_, readers) = ds_config.prepare_readers(cfg)
-    tracks = stormtrack.StormTracks(readers["nexrad"], storm_track_var="MAXZ",
-        min_valid_fraction=0.05, recenter_radius=0)
-    
-    fig = plt.figure(figsize=(8.25,4.5))
-    ax = fig.add_axes([0,0,0.97,1], label="borders")
-    m = area_def2basemap(readers["nexrad"].grid_projection.area,
-        ax=ax, resolution='i')
-    m.drawcoastlines(linewidth=1.5)
-    m.drawcountries(linewidth=1)
-    m.drawstates(color=(0.5,0.5,0.5))
-    
-    cax = fig.add_axes([0.91,0,0.03,1], label="colorbar")
-    ax = fig.add_axes([0,0,0.97,1], label="image", facecolor=(0,0,0,0))
-    plots.storm_tracks(
-        readers["nexrad"].motion_vectors,
-        {time: tracks(time)},
-        time,
-        cax=cax
-    )
-    
-    return fig
+# def track_plot(cfg_fn, time=datetime(2020,8,25,19,20)):
+#     cfg = config.load_config(cfg_fn)
+#     (_, readers) = ds_config.prepare_readers(cfg)
+#     tracks = stormtrack.StormTracks(readers["nexrad"], storm_track_var="MAXZ",
+#         min_valid_fraction=0.05, recenter_radius=0)
+#
+#     fig = plt.figure(figsize=(8.25,4.5))
+#     ax = fig.add_axes([0,0,0.97,1], label="borders")
+#     m = area_def2basemap(readers["nexrad"].grid_projection.area,
+#         ax=ax, resolution='i')
+#     m.drawcoastlines(linewidth=1.5)
+#     m.drawcountries(linewidth=1)
+#     m.drawstates(color=(0.5,0.5,0.5))
+#
+#     cax = fig.add_axes([0.91,0,0.03,1], label="colorbar")
+#     ax = fig.add_axes([0,0,0.97,1], label="image", facecolor=(0,0,0,0))
+#     plots.storm_tracks(
+#         readers["nexrad"].motion_vectors,
+#         {time: tracks(time)},
+#         time,
+#         cax=cax
+#     )
+#
+#     return fig
 
 
 def confusion_plot(
